@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.10)
+
+# Generate compile_commands.json for IDEs, linters and language servers
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 cmake_policy(SET CMP0025 NEW)
 
@@ -6,7 +9,7 @@ project(hdrmerge)
 
 if(WIN32)
     if(NOT(ALGLIB_ROOT))
-        message(FATAL_ERROR "When building on Windows, you need to download 'alglib' source and define its root directory in ALGLIB_ROOT !")
+        message(FATAL_ERROR "When building on Windows, you need to download 'ALGLIB' source and define its root directory in ALGLIB_ROOT !")
     else()
         message(STATUS "ALGLIB_ROOT = ${ALGLIB_ROOT}")
     endif()
@@ -14,7 +17,7 @@ endif()
 
 if(APPLE)
     if(NOT(ALGLIB_ROOT))
-        message(FATAL_ERROR "Passage of ALGLIB_ROOT to cmake failed. Download alglib and define its root directory in ALGLIB_ROOT")
+        message(FATAL_ERROR "Passage of ALGLIB_ROOT to cmake failed. Download ALGLIB and define its root directory in ALGLIB_ROOT")
     else()
         message(STATUS "ALGLIB_ROOT = ${ALGLIB_ROOT}")
     endif()
@@ -51,7 +54,7 @@ find_package(OpenMP)
 if(WIN32)
     set(ALGLIB_INCLUDES ${ALGLIB_ROOT}/src)
 else()
-    find_package(Alglib REQUIRED)
+    find_package(ALGLIB REQUIRED)
 endif()
 
 include_directories(
